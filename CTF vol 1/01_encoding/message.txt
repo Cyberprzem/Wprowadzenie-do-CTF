@@ -1,0 +1,9 @@
+ZADANIE 01 - Encoding
+
+Otrzymałeś poniższy ciąg znaków:
+
+NjY2YzYxNjc3YjYyNjE3MzY1MzYzNDVmNjg2NTc4NWY2MzY4NjE2OTZlN2Q=
+
+Znajdź flagę.
+
+

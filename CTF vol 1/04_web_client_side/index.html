@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>Panel konkursowy</title>
+</head>
+<body>
+  <h1>Panel konkursowy</h1>
+  <p>Dostęp tylko dla administratora.</p>
+  <input id="token" placeholder="token">
+  <button onclick="check()">Sprawdź</button>
+  <p id="result"></p>
+
+  <script>
+    // Uwaga: sekrety po stronie klienta nie są sekretami.
+    const pieces = ["security}", "not_", "is_", "side_", "client_", "flag{"];
+    const expected = "student-admin";
+    function makeFlag() {
+      return pieces.reverse().join("");
+    }
+    function check() {
+      const token = document.getElementById("token").value;
+      if (token === expected) {
+        document.getElementById("result").innerText = makeFlag();
+      } else {
+        document.getElementById("result").innerText = "Brak dostępu.";
+      }
+    }
+  </script>
+</body>
+</html>

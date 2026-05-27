@@ -1,0 +1,5 @@
+Identyfikator uczestnika:
+EVENT: Industrial Security Student Lab
+TRACK: CTF / Blue Team / ICS
+HALL: sala 3.14
+CITY CODE: KTW

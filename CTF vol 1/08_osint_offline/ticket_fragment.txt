@@ -1,0 +1,5 @@
+Fragment biletu:
+PKP IC
+Do: KATOWICE
+Data: 27.05.2026
+Cel podróży: spotkanie koła CTF

@@ -1,0 +1,11 @@
+Normalne reguły środowiska:
+1. Hosty OT mają adresację 10.10.20.0/24 oraz 10.10.30.0/24.
+2. Zapisy Modbus WRITE są dozwolone tylko ze stacji inżynierskiej 10.10.20.15.
+3. Hosty z zakresu 10.99.99.0/24 należą do sieci IT i nie powinny wykonywać zapisów do PLC.
+4. Krytyczny rejestr 40001 steruje stanem PUMP_1.
+
+Format flagi:
+flag{nazwa_komponentu_stan_z_alarmu_malymi_literami}
+
+Przykład formatu, nie odpowiedź:
+flag{motor_2_started}

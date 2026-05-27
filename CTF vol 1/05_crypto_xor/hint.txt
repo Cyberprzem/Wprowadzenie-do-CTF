@@ -1,0 +1,2 @@
+Wiadomość została zaszyfrowana operacją XOR z jednym bajtem klucza.
+Wiadomość jawna zaczyna się od: flag{

@@ -1,0 +1,5 @@
+Organizator zostawił trzy ślady. Zidentyfikuj miasto warsztatu i hasło końcowe.
+
+Format flagi: flag{miasto_bez_polskich_znakow_bez_spacji_malymi_literami_nazwa_miejsca}
+
+Uwaga: to zadanie OSINT jest offline. Nie trzeba używać Internetu.
