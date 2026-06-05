@@ -212,6 +212,7 @@ ufw allow 8081/tcp comment 'vuln apache 2.4.49' >/dev/null
 ufw allow 8082/tcp comment 'DVWA' >/dev/null
 ufw allow 8083/tcp comment 'Tomcat demo' >/dev/null
 ufw allow 2121/tcp comment 'vuln FTP lab' >/dev/null
+ufw allow 6200/tcp comment 'vuln FTP lab auxiliary' >/dev/null
 ufw allow 1445/tcp comment 'vuln Samba lab' >/dev/null
 ufw --force enable >/dev/null
 
@@ -320,10 +321,10 @@ services:
       ctf.service: "samba"
       ctf.lesson: "anonymous-share-hardening"
   vuln-vsftpd:
-    image: cyberxsecurity/vsftpd-2.3.4
+    image: clintmint/vsftpd-2.3.4:1.0
     container_name: ctf-vuln-vsftpd-234
     restart: unless-stopped
-    ports: ["2121:21"]
+    ports: ["2121:21", "6200:6200"]
     labels:
       ctf.service: "vsftpd"
       ctf.lesson: "detect-backdoored-old-service"
@@ -372,7 +373,7 @@ Services:
 - Apache httpd 2.4.49: http://IP:8081/
 - DVWA: http://IP:8082/
 - Tomcat 8: http://IP:8083/
-- vsftpd 2.3.4: IP:2121
+- vsftpd 2.3.4: IP:2121, obraz: clintmint/vsftpd-2.3.4:1.0
 - Samba anonymous-style share: IP:1445
 
 Patch lab services:
@@ -577,7 +578,7 @@ cat >"${BLUE_DIR}/13_detect_old_services.sh" <<'EOF2'
 #!/usr/bin/env bash
 set -euo pipefail
 HOST="${1:-127.0.0.1}"
-PORTS="${2:-22,80,8081,8082,8083,2121,1445}"
+PORTS="${2:-22,80,8081,8082,8083,2121,1445,6200}"
 echo "[+] nmap service versions"; nmap -sV -p "$PORTS" "$HOST" || true
 echo; echo "[+] HTTP headers"; for p in 80 8081 8082 8083; do echo "--- http://${HOST}:${p}/"; curl -I --max-time 4 "http://${HOST}:${p}/" 2>/dev/null || true; done
 echo; echo "[+] Docker containers"; docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}' 2>/dev/null || true
@@ -669,7 +670,7 @@ Vulnerable Docker services:
 - Apache httpd 2.4.49: http://IP:8081/
 - DVWA: http://IP:8082/
 - Tomcat 8: http://IP:8083/
-- vsftpd 2.3.4: IP:2121
+- vsftpd 2.3.4: IP:2121, obraz: clintmint/vsftpd-2.3.4:1.0
 - Samba: IP:1445
 
 Blue Team scripts:
@@ -714,7 +715,7 @@ sudo /opt/ctf-blue/12_tmux_blue_dashboard.sh
 
 Safe Red examples in isolated lab:
 ```bash
-nmap -sV -p 22,80,8081,8082,8083,2121,1445 IP
+nmap -sV -p 22,80,8081,8082,8083,2121,1445,6200 IP
 curl http://IP/.env
 curl "http://IP/ping.php?host=127.0.0.1;id"
 ```
